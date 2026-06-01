@@ -36,8 +36,11 @@
     <!-- Sidebar -->
     @include('partials.sidebar')
 
+    
     <!-- Main Content -->
     <main class="flex-1 overflow-auto pt-0 lg:pt-0">
+        {{-- Navbar --}}
+        @include('partials.navbar')
         <div class="hidden lg:block"></div>
         <div class="lg:hidden h-14"></div>
 

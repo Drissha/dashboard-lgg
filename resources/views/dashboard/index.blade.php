@@ -33,7 +33,7 @@
 
 <div class="card">
     <div class="card-header">
-        <h3 class="text-lg font-semibold">Overview</h3>
+        <h3 class="text-lg text-white font-semibold">Overview</h3>
     </div>
     <div class="card-body">
         <canvas id="dashboardChart" style="max-height: 400px;"></canvas>

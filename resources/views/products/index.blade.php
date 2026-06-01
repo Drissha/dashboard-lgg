@@ -38,6 +38,14 @@
             <th class="p-4 text-left">
                 Name
             </th>
+            
+            <th class="p-4 text-left">
+                Category
+            </th>
+
+            <th class="p-4 text-left">
+                Sub Category
+            </th>
 
             <th class="p-4 text-left">
                 Price
@@ -75,6 +83,14 @@
 
                 <td class="p-4">
                     {{ $product->name }}
+                </td>
+                
+                <td class="p-4">
+                    {{ $product->category->name ?? '-' }}
+                </td>
+
+                <td class="p-4">
+                    {{ $product->subCategory->name ?? '-' }}
                 </td>
 
                 <td class="p-4">
