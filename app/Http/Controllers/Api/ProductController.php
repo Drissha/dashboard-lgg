@@ -14,7 +14,7 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Product::query();
+        $query = Product::with(['category', 'subCategory']);
 
         // Filter by status
         if ($request->has('status')) {
@@ -70,7 +70,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $product = Product::find($id);
+        $product = Product::with(['category', 'subCategory'])->find($id);
 
         if (!$product) {
             return response()->json([

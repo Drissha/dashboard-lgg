@@ -29,8 +29,22 @@ Route::get('locations/{id}', [LocationController::class, 'show']);
 Route::get('products', [ProductController::class, 'index']);
 Route::get('products/{id}', [ProductController::class, 'show']);
 
+// Backward-compatible singular aliases
+Route::get('location', [LocationController::class, 'index']);
+Route::get('location/{id}', [LocationController::class, 'show']);
+Route::get('product', [ProductController::class, 'index']);
+Route::get('product/{id}', [ProductController::class, 'show']);
+
 Route::get('content-pages', [ContentPageController::class, 'index']);
 Route::get('content-pages/{id}', [ContentPageController::class, 'show']);
+
+// Public blog endpoints
+Route::get('blogs', [BlogController::class, 'index']);
+Route::get('blogs/{id}', [BlogController::class, 'show']);
+
+// Backward-compatible singular blog aliases
+Route::get('blog', [BlogController::class, 'index']);
+Route::get('blog/{id}', [BlogController::class, 'show']);
 
 // Authentication
 Route::post('login', [AuthController::class, 'login']);
@@ -46,7 +60,9 @@ Route::middleware('auth:sanctum')->group(function () {
     // Existing resources
     Route::apiResource('banners', BannerController::class);
     Route::apiResource('pages', PageController::class);
-    Route::apiResource('blogs', BlogController::class);
+    Route::post('blogs', [BlogController::class, 'store']);
+    Route::put('blogs/{id}', [BlogController::class, 'update']);
+    Route::delete('blogs/{id}', [BlogController::class, 'destroy']);
 
     Route::get('gallery', [GalleryController::class, 'index']);
     Route::post('gallery', [GalleryController::class, 'store']);

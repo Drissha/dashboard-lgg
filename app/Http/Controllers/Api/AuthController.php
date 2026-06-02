@@ -29,7 +29,19 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-        $request->user()->currentAccessToken()->delete();
+        $user = $request->user();
+
+        if ($user && method_exists($user, 'currentAccessToken') && $user->currentAccessToken()) {
+            $user->currentAccessToken()->delete();
+        }
+
+        Auth::guard('web')->logout();
+
+        if ($request->hasSession()) {
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+        }
+
         return response()->json(['message' => 'Logged out']);
     }
 }

@@ -26,6 +26,7 @@
 
         <thead>
             <tr>
+                <th>Image</th>
                 <th>Location Name</th>
                 <th>Phone</th>
                 <th class="text-right">Action</th>
@@ -35,7 +36,26 @@
         <tbody>
             @forelse($locations as $location)
                 <tr>
-                    <td class="font-medium">{{ $location->name }}</td>
+                    <td>
+                        @if($location->image)
+                            <img
+                                src="{{ Storage::url($location->image) }}"
+                                alt="{{ $location->name }}"
+                                class="w-16 h-16 object-cover rounded-xl border">
+                        @else
+                            <div class="w-16 h-16 rounded-xl border bg-gray-100 flex items-center justify-center text-xs text-gray-400">
+                                No Image
+                            </div>
+                        @endif
+                    </td>
+                    <td class="font-medium">
+                        <div>{{ $location->name }}</div>
+                        <div class="text-xs text-gray-500 mt-1">
+                            Open Shop: {{ $location->open_shop ?: '-' }} |
+                            Kota: {{ $location->kota ?: '-' }} |
+                            Daerah: {{ $location->daerah ?: '-' }}
+                        </div>
+                    </td>
                     <td class="text-gray-600">{{ $location->phone }}</td>
                     <td class="text-right">
                         <div class="flex gap-2 justify-end">
@@ -60,7 +80,7 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="3" class="text-center py-8 text-gray-500">No locations found</td>
+                    <td colspan="4" class="text-center py-8 text-gray-500">No locations found</td>
                 </tr>
             @endforelse
         </tbody>

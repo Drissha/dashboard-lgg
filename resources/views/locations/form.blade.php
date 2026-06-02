@@ -15,6 +15,36 @@
 <div class="mt-5">
 
     <x-input
+        label="Open Shop"
+        name="open_shop"
+        :value="old('open_shop', $location->open_shop ?? '')"
+    />
+
+</div>
+
+<div class="mt-5">
+
+    <x-input
+        label="Kota"
+        name="kota"
+        :value="old('kota', $location->kota ?? '')"
+    />
+
+</div>
+
+<div class="mt-5">
+
+    <x-input
+        label="Daerah"
+        name="daerah"
+        :value="old('daerah', $location->daerah ?? '')"
+    />
+
+</div>
+
+<div class="mt-5">
+
+    <x-input
         label="Google Maps URL"
         name="google_maps_url"
         :value="old('google_maps_url', $location->google_maps_url ?? '')"

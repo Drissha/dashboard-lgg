@@ -19,6 +19,12 @@ class StoreLocationRequest extends FormRequest
 
             'address' => 'required',
 
+            'open_shop' => 'nullable|string|max:255',
+
+            'kota' => 'nullable|string|max:255',
+
+            'daerah' => 'nullable|string|max:255',
+
             'google_maps_url' => 'nullable|url',
 
             'phone' => 'nullable|max:50',

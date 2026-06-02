@@ -11,6 +11,8 @@ Base URL: `http://localhost/api`
 GET /api/locations
 ```
 
+**Catatan:** endpoint `GET /api/locations` dan `GET /api/locations/{id}` bisa dipanggil tanpa token. Alias singular `GET /api/location` dan `GET /api/location/{id}` juga tersedia.
+
 **Response:**
 ```json
 {
@@ -21,6 +23,9 @@ GET /api/locations
             "name": "Store Location 1",
             "phone": "081234567890",
             "address": "Jl. Merdeka No. 123",
+            "open_shop": "08:00 - 22:00",
+            "kota": "Jakarta",
+            "daerah": "Jakarta Pusat",
             "google_maps_url": "https://maps.google.com/...",
             "description": "Our main store",
             "created_at": "2026-06-01T10:00:00Z",
@@ -45,6 +50,9 @@ GET /api/locations/{id}
         "name": "Store Location 1",
         "phone": "081234567890",
         "address": "Jl. Merdeka No. 123",
+        "open_shop": "08:00 - 22:00",
+        "kota": "Jakarta",
+        "daerah": "Jakarta Pusat",
         "google_maps_url": "https://maps.google.com/...",
         "description": "Our main store",
         "created_at": "2026-06-01T10:00:00Z",
@@ -67,6 +75,9 @@ Content-Type: application/json
     "name": "New Store",
     "phone": "081234567890",
     "address": "Jl. Sudirman No. 456",
+    "open_shop": "09:00 - 21:00",
+    "kota": "Jakarta",
+    "daerah": "Jakarta Selatan",
     "google_maps_url": "https://maps.google.com/...",
     "description": "New branch location"
 }
@@ -94,6 +105,8 @@ Authorization: Bearer {token}
 GET /api/products?per_page=15&status=1&search=keyword
 ```
 
+**Catatan:** endpoint `GET /api/products` dan `GET /api/products/{id}` bisa dipanggil tanpa token. Alias singular `GET /api/product` dan `GET /api/product/{id}` juga tersedia.
+
 **Query Parameters:**
 - `per_page` - Items per page (default: 15)
 - `status` - Filter by status (1=active, 0=inactive)
@@ -112,6 +125,18 @@ GET /api/products?per_page=15&status=1&search=keyword
                 "price": 99999,
                 "image": "products/image.jpg",
                 "status": 1,
+                "category": {
+                    "id": 1,
+                    "name": "Category Name",
+                    "slug": "category-name"
+                },
+                "subCategory": {
+                    "id": 2,
+                    "category_id": 1,
+                    "name": "Sub Category Name",
+                    "slug": "sub-category-name",
+                    "description": "Sub category description"
+                },
                 "created_at": "2026-06-01T10:00:00Z",
                 "updated_at": "2026-06-01T10:00:00Z"
             }
@@ -130,6 +155,8 @@ GET /api/products?per_page=15&status=1&search=keyword
 ```
 GET /api/products/{id}
 ```
+
+**Response:** sama seperti list product, tetapi `data` berisi satu object product dengan relasi `category` dan `subCategory`.
 
 ### Create Product (Admin Only)
 ```
@@ -277,6 +304,8 @@ Blog endpoints are available through the API for public listing and admin manage
 ```
 GET /api/blogs
 ```
+
+**Catatan:** endpoint `GET /api/blogs` dan `GET /api/blogs/{id}` bisa dipanggil tanpa token.
 
 **Response:**
 ```json
@@ -518,6 +547,10 @@ axios.post(`${API_BASE}/products`,
     { headers: { Authorization: `Bearer ${token}` } }
 );
 ```
+
+**Catatan untuk frontend browser:**
+- Jika frontend memakai bearer token, simpan token dari `POST /api/login` lalu kirim di header `Authorization: Bearer <token>`.
+- Jika frontend memakai session/cookie auth, panggil `GET /sanctum/csrf-cookie` dulu, lalu kirim request dengan credentials aktif.
 
 ---
 
