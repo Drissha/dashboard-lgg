@@ -26,6 +26,18 @@
         </a>
 
         <a
+            href="{{ route('promotions.index') }}"
+            class="block px-6 py-4 text-md text-gray-700 rounded hover:bg-[#B5BAFF] hover:text-white transition">
+            Promotions
+        </a>
+
+        <a
+            href="{{ route('admin.blogs.index') }}"
+            class="block px-6 py-4 text-md text-gray-700 rounded hover:bg-[#B5BAFF] hover:text-white transition">
+            Blogs
+        </a>
+
+        <a
             href="{{ route('products.index') }}"
             class="block px-6 py-4 text-md text-gray-700 rounded hover:bg-[#B5BAFF] hover:text-white transition">
             Products

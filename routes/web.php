@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ContentPageController;
+use App\Http\Controllers\BlogController;
+use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\SettingController;
@@ -21,6 +23,24 @@ Route::middleware(['auth'])->group(function () {
         'content-pages',
         ContentPageController::class
     );
+
+    Route::resource(
+        'promotions',
+        PromotionController::class
+    );
+
+    Route::resource(
+        'blogs',
+        BlogController::class
+    )->names([
+        'index' => 'admin.blogs.index',
+        'create' => 'admin.blogs.create',
+        'store' => 'admin.blogs.store',
+        'show' => 'admin.blogs.show',
+        'edit' => 'admin.blogs.edit',
+        'update' => 'admin.blogs.update',
+        'destroy' => 'admin.blogs.destroy',
+    ]);
 
     Route::resource(
         'products',

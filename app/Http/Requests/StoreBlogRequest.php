@@ -14,8 +14,13 @@ class StoreBlogRequest extends FormRequest
     public function rules()
     {
         return [
-            'title'=>'required|string',
-            'slug'=>'required|string|unique:blogs,slug',
+            'title' => 'required|string|max:255',
+            'content' => 'nullable|string',
+            'featured_image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:20480',
+            'category_id' => 'nullable|exists:categories,id',
+            'tags' => 'nullable|string|max:255',
+            'published_at' => 'nullable|date',
+            'status' => 'required|boolean',
         ];
     }
 }

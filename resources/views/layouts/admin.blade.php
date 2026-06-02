@@ -45,6 +45,17 @@
         <div class="lg:hidden h-14"></div>
 
         <div class="p-4 sm:p-6 lg:p-8 space-y-6">
+            @if($errors->any())
+                <div class="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700">
+                    <div class="font-semibold mb-2">Please fix the following:</div>
+                    <ul class="list-disc pl-5 space-y-1">
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
             @if(session('success'))
                 <div class="alert alert-success">
                     {{ session('success') }}
@@ -70,6 +81,50 @@
         menubar:true,
         plugins:'link image code table lists',
         toolbar:'undo redo | styles | bold italic | alignleft aligncenter alignright | bullist numlist | code'
+    });
+
+    document.addEventListener('change', function (event) {
+        const input = event.target;
+
+        if (!input.matches('input[type="file"][data-preview-target]')) {
+            return;
+        }
+
+        const target = document.getElementById(input.dataset.previewTarget);
+        if (!target || !input.files || !input.files[0]) {
+            return;
+        }
+
+        const file = input.files[0];
+        const reader = new FileReader();
+
+        if (target.tagName === 'DIV' && input.multiple) {
+            target.innerHTML = '';
+
+            Array.from(input.files).forEach(function (selectedFile) {
+                const imageReader = new FileReader();
+
+                imageReader.onload = function (e) {
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.alt = 'Preview image';
+                    img.className = 'w-32 h-32 object-cover rounded-xl border border-gray-200';
+                    target.appendChild(img);
+                };
+
+                imageReader.readAsDataURL(selectedFile);
+            });
+
+            target.classList.remove('hidden');
+            return;
+        }
+
+        reader.onload = function (e) {
+            target.src = e.target.result;
+            target.classList.remove('hidden');
+        };
+
+        reader.readAsDataURL(file);
     });
 </script>
 

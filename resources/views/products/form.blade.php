@@ -61,8 +61,15 @@
         type="file"
         name="image"
         accept="image/*"
+        data-preview-target="product-image-preview"
         class="w-full border border-gray-200 rounded-md px-3 py-2 text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500">
 </div>
+
+<img
+    id="product-image-preview"
+    src="{{ isset($product) && $product->image ? Storage::url($product->image) : '' }}"
+    alt="Product image preview"
+    class="w-40 h-40 object-cover rounded-xl border border-gray-200 {{ isset($product) && $product->image ? '' : 'hidden' }}">
 
 <div class="form-group">
     <label class="block mb-2 text-sm font-medium text-gray-900">

@@ -269,6 +269,134 @@ Authorization: Bearer {token}
 
 ---
 
+## 4. BLOGS API
+
+Blog endpoints are available through the API for public listing and admin management.
+
+### Get All Blogs (Public)
+```
+GET /api/blogs
+```
+
+**Response:**
+```json
+{
+    "data": {
+        "data": [
+            {
+                "id": 1,
+                "title": "Blog Title",
+                "slug": "blog-title",
+                "content": "<p>Blog content</p>",
+                "featured_image": "blogs/image.jpg",
+                "author_id": 1,
+                "category_id": 1,
+                "tags": "news,promo",
+                "published_at": "2026-06-02T10:00:00Z",
+                "status": 1
+            }
+        ]
+    }
+}
+```
+
+### Get Single Blog (Public)
+```
+GET /api/blogs/{id}
+```
+
+### Create Blog (Admin Only)
+```
+POST /api/blogs
+Authorization: Bearer {token}
+Content-Type: application/json
+```
+
+**Form Data:**
+```json
+{
+    "title": "Blog Title",
+    "slug": "blog-title",
+    "content": "<p>Blog content</p>",
+    "featured_image": "blogs/image.jpg",
+    "author_id": 1,
+    "category_id": 1,
+    "tags": "news,promo",
+    "published_at": "2026-06-02 10:00:00",
+    "status": 1
+}
+```
+
+**Notes:**
+- `featured_image` is stored as a string path in the API.
+- The web admin blog form generates the slug automatically.
+
+### Update Blog (Admin Only)
+```
+PUT /api/blogs/{id}
+Authorization: Bearer {token}
+Content-Type: application/json
+```
+
+### Delete Blog (Admin Only)
+```
+DELETE /api/blogs/{id}
+Authorization: Bearer {token}
+```
+
+---
+
+## 5. PROMOTIONS ADMIN CRUD
+
+Promotion management is currently available in the admin web UI, not under `/api`.
+
+### List Promotions
+```
+GET /promotions
+```
+
+### Show Create Form
+```
+GET /promotions/create
+```
+
+### Store Promotion
+```
+POST /promotions
+Content-Type: multipart/form-data
+```
+
+**Form Data:**
+```
+name: "Summer Promo"
+active: 1
+datetime: "2026-06-02 12:30"
+images[]: [file]
+images[]: [file]
+```
+
+**Notes:**
+- `images` is stored as a JSON array.
+- Each promotion image supports uploads up to `20480 KB`.
+
+### Show Edit Form
+```
+GET /promotions/{id}/edit
+```
+
+### Update Promotion
+```
+PUT /promotions/{id}
+Content-Type: multipart/form-data
+```
+
+### Delete Promotion
+```
+DELETE /promotions/{id}
+```
+
+---
+
 ## Frontend Usage Examples
 
 ### JavaScript/Fetch

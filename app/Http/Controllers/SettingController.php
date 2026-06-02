@@ -13,7 +13,7 @@ class SettingController extends Controller
         $setting = Setting::first();
 
         return view(
-            'settings.index',
+            'setting.index',
             compact('setting')
         );
     }
@@ -22,7 +22,7 @@ class SettingController extends Controller
         UpdateSettingRequest $request
     ) {
 
-        $setting = Setting::first();
+        $setting = Setting::first() ?? new Setting();
 
         $data = $request->validated();
 
@@ -39,7 +39,8 @@ class SettingController extends Controller
                 ->store('settings', 'public');
         }
 
-        $setting->update($data);
+        $setting->fill($data);
+        $setting->save();
 
         return back()
             ->with('success', 'Updated');

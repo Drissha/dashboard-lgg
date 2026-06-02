@@ -49,18 +49,13 @@
     <input
         type="file"
         name="image"
+        data-preview-target="location-image-preview"
         class="w-full border rounded-xl p-3">
 
 </div>
 
-@if(isset($location) && $location->image)
-
-<div class="mt-5">
-
-    <img
-        src="{{ Storage::url($location->image) }}"
-        class="w-40 rounded-xl border">
-
-</div>
-
-@endif
+<img
+    id="location-image-preview"
+    src="{{ isset($location) && $location->image ? Storage::url($location->image) : '' }}"
+    alt="Location image preview"
+    class="w-40 h-40 object-cover rounded-xl border {{ isset($location) && $location->image ? '' : 'hidden' }}">
