@@ -375,23 +375,79 @@ Authorization: Bearer {token}
 
 ---
 
-## 5. PROMOTIONS ADMIN CRUD
+## 5. PROMOTIONS API
 
-Promotion management is currently available in the admin web UI, not under `/api`.
+Promotions are available through the API for public listing and admin management.
 
-### List Promotions
+### Get All Promotions (Public)
 ```
-GET /promotions
-```
-
-### Show Create Form
-```
-GET /promotions/create
+GET /api/promotions?per_page=10&active=1&search=summer
 ```
 
-### Store Promotion
+**Catatan:** endpoint `GET /api/promotions` dan `GET /api/promotions/{id}` bisa dipanggil tanpa token.
+
+**Query Parameters:**
+- `per_page` - Items per page (default: 10)
+- `active` - Filter by active state (`1` or `0`)
+- `search` - Search by promotion name
+
+**Response:**
+```json
+{
+    "success": true,
+    "data": {
+        "data": [
+            {
+                "id": 1,
+                "name": "Summer Promo",
+                "active": true,
+                "datetime": "2026-06-02T12:30:00Z",
+                "images": [
+                    "promotions/image-1.jpg",
+                    "promotions/image-2.jpg"
+                ],
+                "created_at": "2026-06-02T10:00:00Z",
+                "updated_at": "2026-06-02T10:00:00Z"
+            }
+        ],
+        "current_page": 1,
+        "per_page": 10,
+        "total": 5,
+        "last_page": 1
+    },
+    "message": "Promotions retrieved successfully"
+}
 ```
-POST /promotions
+
+### Get Single Promotion (Public)
+```
+GET /api/promotions/{id}
+```
+
+**Response:**
+```json
+{
+    "success": true,
+    "data": {
+        "id": 1,
+        "name": "Summer Promo",
+        "active": true,
+        "datetime": "2026-06-02T12:30:00Z",
+        "images": [
+            "promotions/image-1.jpg",
+            "promotions/image-2.jpg"
+        ],
+        "created_at": "2026-06-02T10:00:00Z",
+        "updated_at": "2026-06-02T10:00:00Z"
+    },
+    "message": "Promotion retrieved successfully"
+}
+```
+
+### Create Promotion (Admin Only)
+```
+POST /api/promotions
+Authorization: Bearer {token}
 Content-Type: multipart/form-data
 ```
 
@@ -408,20 +464,17 @@ images[]: [file]
 - `images` is stored as a JSON array.
 - Each promotion image supports uploads up to `20480 KB`.
 
-### Show Edit Form
+### Update Promotion (Admin Only)
 ```
-GET /promotions/{id}/edit
-```
-
-### Update Promotion
-```
-PUT /promotions/{id}
+PUT /api/promotions/{id}
+Authorization: Bearer {token}
 Content-Type: multipart/form-data
 ```
 
-### Delete Promotion
+### Delete Promotion (Admin Only)
 ```
-DELETE /promotions/{id}
+DELETE /api/promotions/{id}
+Authorization: Bearer {token}
 ```
 
 ---

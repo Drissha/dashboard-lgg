@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\BannerController;
 use App\Http\Controllers\Api\PageController;
 use App\Http\Controllers\Api\GalleryController;
 use App\Http\Controllers\Api\BlogController;
+use App\Http\Controllers\Api\PromotionController;
 use App\Http\Controllers\Api\UploadController;
 use App\Http\Controllers\Api\DashboardController;
 use App\Http\Controllers\Api\LocationController;
@@ -42,6 +43,9 @@ Route::get('content-pages/{id}', [ContentPageController::class, 'show']);
 Route::get('blogs', [BlogController::class, 'index']);
 Route::get('blogs/{id}', [BlogController::class, 'show']);
 
+Route::get('promotions', [PromotionController::class, 'index']);
+Route::get('promotions/{id}', [PromotionController::class, 'show']);
+
 // Backward-compatible singular blog aliases
 Route::get('blog', [BlogController::class, 'index']);
 Route::get('blog/{id}', [BlogController::class, 'show']);
@@ -63,6 +67,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('blogs', [BlogController::class, 'store']);
     Route::put('blogs/{id}', [BlogController::class, 'update']);
     Route::delete('blogs/{id}', [BlogController::class, 'destroy']);
+
+    Route::post('promotions', [PromotionController::class, 'store']);
+    Route::put('promotions/{id}', [PromotionController::class, 'update']);
+    Route::delete('promotions/{id}', [PromotionController::class, 'destroy']);
 
     Route::get('gallery', [GalleryController::class, 'index']);
     Route::post('gallery', [GalleryController::class, 'store']);
