@@ -45,14 +45,6 @@
 {{ old('description',$product->description ?? '') }}
 </x-textarea>
 
-<x-input
-    type="number"
-    label="Price"
-    name="price"
-    step="0.01"
-    :value="old('price',$product->price ?? '')"
-/>
-
 <div class="form-group">
     <label class="block mb-2 text-sm font-medium text-gray-900">
         Product Image

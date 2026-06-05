@@ -48,10 +48,6 @@
             </th>
 
             <th class="p-4 text-left">
-                Price
-            </th>
-
-            <th class="p-4 text-left">
                 Status
             </th>
 
@@ -91,10 +87,6 @@
 
                 <td class="p-4">
                     {{ $product->subCategory->name ?? '-' }}
-                </td>
-
-                <td class="p-4">
-                    Rp {{ number_format($product->price) }}
                 </td>
 
                 <td class="p-4">

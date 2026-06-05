@@ -18,7 +18,7 @@ class StorePromotionRequest extends FormRequest
             'active' => 'required|boolean',
             'datetime' => 'nullable|date',
             'images' => 'nullable|array',
-            'images.*' => 'image|mimes:jpg,jpeg,png,webp|max:20480',
+            'images.*' => 'image|mimes:jpg,jpeg,png,webp|max:2048',
         ];
     }
 }
