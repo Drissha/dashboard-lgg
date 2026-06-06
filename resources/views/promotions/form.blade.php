@@ -25,6 +25,7 @@
 
 <div class="form-group">
     <label class="block mb-2 text-sm font-medium text-gray-900">Images</label>
+    <p class="text-base text-gray-500">Gunakan format 1:1 (persegi), size maksimal 2MB</p>
     <input
         type="file"
         name="images[]"
